@@ -12,32 +12,32 @@ namespace PersonManagementApi.Data
         {
         }
 
-        public virtual DbSet<Personne> Personnes { get; set; }
-        public virtual DbSet<Emploi> Emplois { get; set; }
+        public virtual DbSet<Person> Personnes { get; set; }
+        public virtual DbSet<Job> Emplois { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Personne>(entity =>
+            modelBuilder.Entity<Person>(entity =>
             {
                 entity.HasKey(e => e.Id);
-                entity.Property(e => e.Nom)
+                entity.Property(e => e.LastName)
                     .IsRequired()
                     .HasMaxLength(100)
                     .IsUnicode(false);
-                entity.Property(e => e.Prenom)
+                entity.Property(e => e.FirstName)
                    .IsRequired()
                    .HasMaxLength(100)
                    .IsUnicode(false);
 
-                entity.Property(e => e.DateNaissance)
+                entity.Property(e => e.BirthDate)
                     .IsRequired();
 
-                entity.HasMany(p => p.Emplois)
+                entity.HasMany(p => p.Jobs)
                       .WithOne(e => e.Personne)
                       .HasForeignKey(e => e.PersonneId);
             });
 
-            modelBuilder.Entity<Emploi>(entity =>
+            modelBuilder.Entity<Job>(entity =>
             {
                 entity.HasKey(e => e.Id);
                 entity.Property(e => e.NomEntreprise)

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PersonManagementApi.Data;
 
@@ -11,9 +12,11 @@ using PersonManagementApi.Data;
 namespace PersonManagementApi.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20240825181209_update")]
+    partial class update
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,7 +25,7 @@ namespace PersonManagementApi.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("PersonManagementApi.Data.Job", b =>
+            modelBuilder.Entity("PersonManagementApi.Data.Emploi", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -75,7 +78,7 @@ namespace PersonManagementApi.Migrations
                         .IsUnicode(false)
                         .HasColumnType("varchar(100)");
 
-                    b.Property<string>("LastName")
+                    b.Property<string>("LastNaame")
                         .IsRequired()
                         .HasMaxLength(100)
                         .IsUnicode(false)
@@ -86,7 +89,7 @@ namespace PersonManagementApi.Migrations
                     b.ToTable("Personnes");
                 });
 
-            modelBuilder.Entity("PersonManagementApi.Data.Job", b =>
+            modelBuilder.Entity("PersonManagementApi.Data.Emploi", b =>
                 {
                     b.HasOne("PersonManagementApi.Data.Person", "Personne")
                         .WithMany("Jobs")
